@@ -1,18 +1,33 @@
-# BHS Inventory — GitHub-ready (Vite + Firebase)
+# Inventory — Firestore (Vite + React + TS)
 
-This is the **Cloud Sync** version. It reads Firebase config from `.env.local` during build (Vite).
+Full checklist implemented:
+- Add/Edit/Delete items (modal)
+- Search + filters (Name Drop, Category, Plush, Color, Tie‑Dye All|Yes|No)
+- Numbered rows that follow filter/sort
+- Totals/stat cards: Total SKUs, Total Units, Filtered SKUs, Units in Name Drop
+- Import CSV (merge by barcode, normalize text + boolean)
+- Export CSV (proper quoting)
+- Image upload to Firebase Storage
+- Realtime sync across devices (Firestore + Anonymous Auth)
 
-## Quick start
-1) Create a Firebase project. Enable **Anonymous Auth**; create **Firestore** (Production) and **Storage**.
-2) Copy `.env.example` → `.env.local` and paste your Web App keys.
-3) Install & run:
+## Firebase Setup
+Enable Anonymous Auth, Firestore, and (optional) Storage.
+Set env vars (Vercel → Project Settings → Environment Variables):
+
+- VITE_FIREBASE_API_KEY
+- VITE_FIREBASE_AUTH_DOMAIN
+- VITE_FIREBASE_PROJECT_ID
+- VITE_FIREBASE_STORAGE_BUCKET
+- VITE_FIREBASE_APP_ID
+- VITE_FIRESTORE_COLLECTION (e.g. items)
+
+## Local Dev
 ```bash
 npm install
 npm run dev
 ```
 
 ## Deploy (Vercel)
-- Import repo → set env vars `VITE_FIREBASE_*` (from `.env.local`) → build: `npm run build` → output: `dist`.
-
-## CSV
-Header: `barcode,plush,style,category,color,nameDrop,quantity,tieDye,notes,imageUrl`. Rows without `barcode` are skipped.
+- Framework preset: **Vite**
+- Build command: `npm run build`
+- Output directory: `dist`
